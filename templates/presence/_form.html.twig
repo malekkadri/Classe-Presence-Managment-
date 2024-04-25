@@ -1,0 +1,29 @@
+
+
+{{ form_start(form, {attr: {'novalidate': 'novalidate', 'class': 'g-3'}}) }}
+
+    {% for field in form %}
+        <div class="mb-3">
+            {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_errors(field) }}
+            {{ form_widget(field, {'attr': {'class': field.vars.name == 'date' ? 'form-control datepicker' : 'form-control'}}) }}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+
+{% block javascripts %}
+ 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+                startDate: '-3d', // Customize this as needed
+            });
+        });
+    </script>
+{% endblock %}

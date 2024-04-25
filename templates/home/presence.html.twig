@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Presence List for {{ classe.nom }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Presence List for {{ classe.nom }}</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Session</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for presence in presences %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ presence.date|date('Y-m-d H:i') }}</td>
+                        <td>{{ presence.seance }}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">Details</a> <!-- Modify or use appropriate links -->
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">No presences found for {{ classe.nom }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="{{ path('app_home') }}" class="btn btn-secondary">Back to Home</a>
+</div>
+{% endblock %}
